@@ -1,14 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iServer", "iServer\iServer.vcproj", "{19479289-8600-48E0-AC2B-EAD07FB80F98}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iServer", "iServer\iServer.vcxproj", "{19479289-8600-48E0-AC2B-EAD07FB80F98}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcproj", "{3A7F67B5-914D-4A3D-AC2E-48374551A88F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{19479289-8600-48E0-AC2B-EAD07FB80F98} = {19479289-8600-48E0-AC2B-EAD07FB80F98}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcxproj", "{3A7F67B5-914D-4A3D-AC2E-48374551A88F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "message", "message\message.vcproj", "{8981A147-FA50-45E1-8407-8F7DCF339E3A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "message", "message\message.vcxproj", "{8981A147-FA50-45E1-8407-8F7DCF339E3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
