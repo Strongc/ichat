@@ -5,11 +5,12 @@
 #include "iServer.h"
 
 #include "UserMgr.h"
-#include "NetProc.h"
+#include "RestRequest.h"
 
 ISERVER_API int fniServer(void)
 {
     GetUserMgr().LoadRes();
+    GetRestRequest().Start();
     return 0;
 }
 

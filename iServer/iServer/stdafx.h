@@ -37,3 +37,9 @@ using namespace Chat;
 
 #include "../lib/libtransfer.h"
 #pragma comment(lib, "../lib/libtransfer.lib")
+
+#include "../lib/libhttp.h"
+#pragma comment(lib, "../lib/libhttp.lib")
+
+#include "../lib/librest.h"
+#pragma comment(lib, "../lib/librest.lib")

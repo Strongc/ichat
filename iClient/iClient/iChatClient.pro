@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = iChatClient
+TARGET = iClient
 TEMPLATE = app
 
 
@@ -35,4 +35,10 @@ RC_FILE += iChatClient.rc
 
 QT      += xml
 
-LIBS    += lib/curl/libcurl
+win32: LIBS += -L$$PWD/lib/curl/ -llibcurl
+
+INCLUDEPATH += $$PWD/lib/curl
+DEPENDPATH += $$PWD/lib/curl
+
+win32:!win32-g++ PRE_TARGETDEPS += $$PWD/lib/curl/libcurl.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/lib/curl/liblibcurl.a

@@ -201,11 +201,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\NetProc.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\ProcMsg.cpp"
+				RelativePath=".\RestRequest.cpp"
 				>
 			</File>
 			<File
@@ -255,15 +251,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\NetProc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ProcMsg.h"
-				>
-			</File>
-			<File
 				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RestRequest.h"
 				>
 			</File>
 			<File
@@ -353,7 +345,39 @@
 				>
 			</File>
 			<File
+				RelativePath=".\NetProc.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\NetProc.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\public\opt.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ProcMsg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ProcMsg.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="http"
+			>
+			<File
+				RelativePath="..\lib\libhttp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\lib\librest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\lib\type_def.h"
 				>
 			</File>
 		</Filter>
