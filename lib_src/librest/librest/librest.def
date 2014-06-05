@@ -1,0 +1,5 @@
+LIBRARY "librest"
+
+EXPORTS
+    rest_fun_regist		@1
+	rest_fun_set		@2

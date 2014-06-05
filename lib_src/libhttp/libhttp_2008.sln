@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhttp", "libhttp\libhttp.vcproj", "{988B639E-5FC5-45F8-B4C9-D2A38A00B7D5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo_http", "demo_http\demo_http.vcproj", "{28ADF346-B32F-4500-BD97-8322C02C99BF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{988B639E-5FC5-45F8-B4C9-D2A38A00B7D5} = {988B639E-5FC5-45F8-B4C9-D2A38A00B7D5}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{988B639E-5FC5-45F8-B4C9-D2A38A00B7D5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{988B639E-5FC5-45F8-B4C9-D2A38A00B7D5}.Debug|Win32.Build.0 = Debug|Win32
+		{988B639E-5FC5-45F8-B4C9-D2A38A00B7D5}.Release|Win32.ActiveCfg = Release|Win32
+		{988B639E-5FC5-45F8-B4C9-D2A38A00B7D5}.Release|Win32.Build.0 = Release|Win32
+		{28ADF346-B32F-4500-BD97-8322C02C99BF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{28ADF346-B32F-4500-BD97-8322C02C99BF}.Debug|Win32.Build.0 = Debug|Win32
+		{28ADF346-B32F-4500-BD97-8322C02C99BF}.Release|Win32.ActiveCfg = Release|Win32
+		{28ADF346-B32F-4500-BD97-8322C02C99BF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
