@@ -57,12 +57,21 @@ public:
     bool GetUserConfig(const int nUserId, UserConfig* pUserConfig);
     // 设置用户配置
     bool SetUserConfig(const int nUserId, const UserConfig& userConfig);
+
+    /* proto */
     // 获取区域结构
-    bool GetRegion(const char* client_ip);
+    bool GetRegion_Proto(const char* client_ip);
     // 根据区域ID获取下属的用户
-    bool GetUserByRegion(const char* client_ip, const int nRegionId);
+    bool GetUserByRegion_Proto(const char* client_ip, const int nRegionId);
     // 根据用户ID获取用户信息
-    bool GetUser(const int nUserId, User& userInfo);
+    bool GetUser_Proto(const int nUserId, User& userInfo);
+
+    /* xml */
+    bool GetRegion_Xml(std::string& region_list_xml);
+    bool GetRegionInfo_Xml(const std::string& _region_id, std::string& region_info);
+
+    bool GetUser_Xml(const std::string& _region_id, std::string& user_list_xml);
+    bool GetUserInfo_Xml(const std::string& _user_id, std::string& user_info);
 };
 
 

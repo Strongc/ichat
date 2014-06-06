@@ -21,7 +21,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			CharacterSet="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -43,7 +43,7 @@
 				AdditionalOptions="-Zm200"
 				Optimization="0"
 				AdditionalIncludeDirectories="./sql_helper/lib/sqlite3;./sql_helper/lib/mysql/include;../message/protobuf/include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;ISERVER_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;ISERVER_EXPORTS;MARKUP_STL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -175,6 +175,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\ApiProc.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\dllmain.cpp"
 				>
 				<FileConfiguration
@@ -198,6 +202,10 @@
 			</File>
 			<File
 				RelativePath=".\iServer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\lib\Markup.cpp"
 				>
 			</File>
 			<File
@@ -243,11 +251,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\ApiProc.h"
+				>
+			</File>
+			<File
 				RelativePath="..\lib\BoostMutex.h"
 				>
 			</File>
 			<File
 				RelativePath=".\iServer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\lib\Markup.h"
 				>
 			</File>
 			<File
@@ -276,6 +292,10 @@
 			</File>
 			<File
 				RelativePath="..\lib\utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\xml_def.h"
 				>
 			</File>
 		</Filter>

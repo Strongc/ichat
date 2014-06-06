@@ -28,8 +28,16 @@
 #include <boost/filesystem/operations.hpp> 
 
 
+#ifdef _UNICODE
+#define _tstring wstring
+#else
+#define _tstring string
+#endif
+
 #include "../lib/BoostMutex.h"
 #include "../lib/utils.h"
+#include "../lib/Markup.h"
+#include "../lib/fcTchar.h"
 
 #include "../lib/message.pb.h"
 #pragma comment(lib, "../lib/message.lib")

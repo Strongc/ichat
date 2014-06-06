@@ -3,25 +3,28 @@
 
 #include <vector>
 
-enum http_status_type
+namespace http_status
 {
-	ok = 200,
-	created = 201,
-	accepted = 202,
-	no_content = 204,
-	multiple_choices = 300,
-	moved_permanently = 301,
-	moved_temporarily = 302,
-	not_modified = 304,
-	bad_request = 400,
-	unauthorized = 401,
-	forbidden = 403,
-	not_found = 404,
-	internal_server_error = 500,
-	not_implemented = 501,
-	bad_gateway = 502,
-	service_unavailable = 503
-};
+    enum http_status_type
+    {
+        ok = 200,
+        created = 201,
+        accepted = 202,
+        no_content = 204,
+        multiple_choices = 300,
+        moved_permanently = 301,
+        moved_temporarily = 302,
+        not_modified = 304,
+        bad_request = 400,
+        unauthorized = 401,
+        forbidden = 403,
+        not_found = 404,
+        internal_server_error = 500,
+        not_implemented = 501,
+        bad_gateway = 502,
+        service_unavailable = 503
+    };
+}
 
 struct _header
 {
@@ -41,7 +44,7 @@ struct _request
 
 struct _reply
 {
-	http_status_type status;
+    http_status::http_status_type status;
 	std::string content;
 	std::vector<_header> headers;
 	std::string extern_string;

@@ -56,7 +56,7 @@ bool CUserOperator::GetSubUserByRegionId(const int nRegionId, std::list<User>& l
         userInfo.set_user_name(rs.get_string_item("user_name"));
         userInfo.set_user_pwd(rs.get_string_item("user_pwd"));
         userInfo.set_user_ip(rs.get_string_item("user_ip"));
-        userInfo.set_client_name(rs.get_string_item("client_name"));
+        userInfo.set_display_name(rs.get_string_item("client_name"));
         userInfo.set_longin_time(rs.get_int64_item("login_time"));
         userInfo.set_logout_time(rs.get_int64_item("logout_time"));
         userInfo.set_last_beat(rs.get_int64_item("last_beat"));
@@ -116,7 +116,7 @@ bool CUserOperator::GetUserInfoByUserId(const int nUserId, User& userInfo)
         userInfo.set_user_name(rs.get_string_item("user_name"));
         userInfo.set_user_pwd(rs.get_string_item("user_pwd"));
         userInfo.set_user_ip(rs.get_string_item("user_ip"));
-        userInfo.set_client_name(rs.get_string_item("client_name"));
+        userInfo.set_display_name(rs.get_string_item("client_name"));
         userInfo.set_longin_time(rs.get_int64_item("login_time"));
         userInfo.set_logout_time(rs.get_int64_item("logout_time"));
         userInfo.set_last_beat(rs.get_int64_item("last_beat"));
@@ -166,7 +166,7 @@ bool CUserOperator::GetUsers(std::list<User>& lsAllUser)
         userInfo.set_user_name(rs.get_string_item("user_name"));
         userInfo.set_user_pwd(rs.get_string_item("user_pwd"));
         userInfo.set_user_ip(rs.get_string_item("user_ip"));
-        userInfo.set_client_name(rs.get_string_item("client_name"));
+        userInfo.set_display_name(rs.get_string_item("client_name"));
         userInfo.set_longin_time(rs.get_int64_item("login_time"));
         userInfo.set_logout_time(rs.get_int64_item("logout_time"));
         userInfo.set_last_beat(rs.get_int64_item("last_beat"));
@@ -224,7 +224,7 @@ bool CUserOperator::UpdateUserInfo(const User& userInfo)
         user_ip='%s', client_name='%s', login_time='%d', \
         logout_time='%d', last_beat='%d', parent_region='%d' \
         where _id=%d", userInfo.user_name().c_str(), userInfo.user_pwd().c_str(),
-        userInfo.user_ip().c_str(), userInfo.client_name().c_str(), (int)userInfo.longin_time(),
+        userInfo.user_ip().c_str(), userInfo.display_name().c_str(), (int)userInfo.longin_time(),
         (int)userInfo.logout_time(), (int)userInfo.last_beat(), 
         userInfo.parent_id(), userInfo.user_id());
 
@@ -309,7 +309,7 @@ bool CUserOperator::AddUserInfo(const User& userInfo)
         "insert into user(user_name, user_pwd, client_name, parent_region) \
         values('%s', '%s', '%s', %d)", 
         userInfo.user_name().c_str(), userInfo.user_pwd().c_str(),
-        userInfo.client_name().c_str(), userInfo.parent_id());
+        userInfo.display_name().c_str(), userInfo.parent_id());
 
     if (false == m_pSqlHelper->Excute(sql))
     {

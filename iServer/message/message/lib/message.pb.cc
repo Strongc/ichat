@@ -56,10 +56,9 @@ void protobuf_AssignDesc_message_2eproto() {
       "message.proto");
   GOOGLE_CHECK(file != NULL);
   Region_descriptor_ = file->message_type(0);
-  static const int Region_offsets_[5] = {
+  static const int Region_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Region, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Region, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Region, region_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Region, parent_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Region, ui_handle_),
   };
@@ -79,7 +78,7 @@ void protobuf_AssignDesc_message_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, user_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, user_pwd_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, user_ip_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, client_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, display_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, user_phone_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, longin_time_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, logout_time_),
@@ -318,53 +317,53 @@ void protobuf_AddDesc_message_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rmessage.proto\022\004Chat\"f\n\006Region\022\n\n\002id\030\001 "
-    "\001(\005\022\014\n\004name\030\002 \001(\t\022\034\n\006region\030\003 \003(\0132\014.Chat"
-    ".Region\022\021\n\tparent_id\030\004 \001(\005\022\021\n\tui_handle\030"
-    "\005 \001(\005\"\244\002\n\004User\022\021\n\tuser_name\030\001 \001(\t\022\020\n\010use"
-    "r_pwd\030\002 \001(\t\022\017\n\007user_ip\030\003 \001(\t\022\023\n\013client_n"
-    "ame\030\004 \001(\t\022\022\n\nuser_phone\030\005 \001(\t\022\023\n\013longin_"
-    "time\030\006 \001(\003\022\023\n\013logout_time\030\007 \001(\003\022\021\n\tlast_"
-    "beat\030\010 \001(\003\022\021\n\tparent_id\030\t \001(\005\022\017\n\007user_id"
-    "\030\n \001(\005\022\021\n\tui_handle\030\013 \001(\005\022%\n\013user_config"
-    "\030\014 \001(\0132\020.Chat.UserConfig\022\020\n\010udp_port\030\r \001"
-    "(\005\022\020\n\010tcp_port\030\016 \001(\005\"A\n\tLoginInfo\022\021\n\tuse"
-    "r_name\030\001 \001(\t\022\020\n\010user_pwd\030\002 \001(\t\022\017\n\007user_i"
-    "p\030\003 \001(\t\",\n\013LoginResult\022\017\n\007user_id\030\001 \001(\005\022"
-    "\014\n\004desc\030\002 \001(\t\"\250\001\n\nUserConfig\022\021\n\tuse_soun"
-    "d\030\001 \001(\005\022\022\n\nuse_bubble\030\002 \001(\005\022\022\n\nfont_colo"
-    "r\030\003 \001(\005\022\021\n\tfont_name\030\004 \001(\t\022\022\n\nfont_style"
-    "\030\005 \001(\005\022\021\n\tfont_size\030\006 \001(\005\022\021\n\trun_start\030\007"
-    " \001(\005\022\022\n\nauto_login\030\010 \001(\005\"t\n\007PostMsg\022\022\n\nt"
-    "o_user_id\030\001 \001(\005\022\024\n\014from_user_id\030\002 \001(\005\022\020\n"
-    "\010msg_type\030\003 \001(\005\022\020\n\010text_msg\030\004 \001(\t\022\033\n\010pos"
-    "t_cmd\030\005 \001(\0162\t.Chat.CMD\"\301\001\n\tNetMsgReq\022\026\n\003"
-    "cmd\030\001 \002(\0162\t.Chat.CMD\022\017\n\007user_ip\030\002 \002(\t\022#\n"
-    "\nlogin_info\030\004 \001(\0132\017.Chat.LoginInfo\022\017\n\007us"
-    "er_id\030\005 \001(\005\022%\n\013user_config\030\006 \001(\0132\020.Chat."
-    "UserConfig\022\037\n\010post_msg\030\007 \001(\0132\r.Chat.Post"
-    "Msg\022\r\n\005value\030\010 \001(\005\"\203\001\n\tNetMsgRsp\022\026\n\003cmd\030"
-    "\001 \002(\0162\t.Chat.CMD\022\016\n\006result\030\002 \002(\005\022\'\n\014logi"
-    "n_result\030\003 \001(\0132\021.Chat.LoginResult\022%\n\013use"
-    "r_config\030\004 \001(\0132\020.Chat.UserConfig\"\231\001\n\010Tra"
-    "nsMsg\022\026\n\003cmd\030\001 \002(\0162\t.Chat.CMD\022\034\n\006region\030"
-    "\002 \003(\0132\014.Chat.Region\022\030\n\004user\030\003 \003(\0132\n.Chat"
-    ".User\022\037\n\010post_msg\030\004 \001(\0132\r.Chat.PostMsg\022\016"
-    "\n\006result\030\005 \002(\005\022\014\n\004desc\030\006 \001(\t\":\n\017PRIVATE_"
-    "MSG_RSP\022\026\n\003cmd\030\001 \002(\0162\t.Chat.CMD\022\017\n\007confi"
-    "rm\030\002 \001(\005*\370\003\n\003CMD\022\022\n\rLOGIN_REQUEST\020\221N\022\023\n\016"
-    "LOGIN_RESPONSE\020\222N\022\023\n\016LOGOUT_REQUEST\020\223N\022\026"
-    "\n\021CLIENT_HEART_BEAT\020\224N\022\027\n\021CLIENT_GET_CON"
-    "FIG\020\241\234\001\022\033\n\025CLIENT_GET_CONFIG_RSP\020\242\234\001\022\027\n\021"
-    "CLIENT_SET_CONFIG\020\243\234\001\022\033\n\025CLIENT_SET_CONF"
-    "IG_RSP\020\244\234\001\022\027\n\021CLIENT_GET_REGION\020\261\352\001\022\033\n\025C"
-    "LIENT_GET_REGION_RSP\020\262\352\001\022\025\n\017CLIENT_GET_U"
-    "SER\020\263\352\001\022\031\n\023CLIENT_GET_USER_RSP\020\264\352\001\022\025\n\017CL"
-    "IENT_POST_MSG\020\301\270\002\022\031\n\023CLIENT_POST_MSG_RSP"
-    "\020\302\270\002\022\024\n\016CLIENT_RES_RSP\020\303\270\002\022\030\n\022CLIENT_CHA"
-    "T_INVITE\020\321\206\003\022\030\n\022CLIENT_CHAT_CANCEL\020\322\206\003\022\030"
-    "\n\022CLIENT_CHAT_ACCEPT\020\323\206\003\022\030\n\022CLIENT_CHAT_"
-    "REFUSE\020\324\206\003\022\027\n\021CLIENT_CHAT_ERROR\020\325\206\003", 1875);
+    "\n\rmessage.proto\022\004Chat\"H\n\006Region\022\n\n\002id\030\001 "
+    "\001(\005\022\014\n\004name\030\002 \001(\t\022\021\n\tparent_id\030\004 \001(\005\022\021\n\t"
+    "ui_handle\030\005 \001(\005\"\245\002\n\004User\022\021\n\tuser_name\030\001 "
+    "\001(\t\022\020\n\010user_pwd\030\002 \001(\t\022\017\n\007user_ip\030\003 \001(\t\022\024"
+    "\n\014display_name\030\004 \001(\t\022\022\n\nuser_phone\030\005 \001(\t"
+    "\022\023\n\013longin_time\030\006 \001(\003\022\023\n\013logout_time\030\007 \001"
+    "(\003\022\021\n\tlast_beat\030\010 \001(\003\022\021\n\tparent_id\030\t \001(\005"
+    "\022\017\n\007user_id\030\n \001(\005\022\021\n\tui_handle\030\013 \001(\005\022%\n\013"
+    "user_config\030\014 \001(\0132\020.Chat.UserConfig\022\020\n\010u"
+    "dp_port\030\r \001(\005\022\020\n\010tcp_port\030\016 \001(\005\"A\n\tLogin"
+    "Info\022\021\n\tuser_name\030\001 \001(\t\022\020\n\010user_pwd\030\002 \001("
+    "\t\022\017\n\007user_ip\030\003 \001(\t\",\n\013LoginResult\022\017\n\007use"
+    "r_id\030\001 \001(\005\022\014\n\004desc\030\002 \001(\t\"\250\001\n\nUserConfig\022"
+    "\021\n\tuse_sound\030\001 \001(\005\022\022\n\nuse_bubble\030\002 \001(\005\022\022"
+    "\n\nfont_color\030\003 \001(\005\022\021\n\tfont_name\030\004 \001(\t\022\022\n"
+    "\nfont_style\030\005 \001(\005\022\021\n\tfont_size\030\006 \001(\005\022\021\n\t"
+    "run_start\030\007 \001(\005\022\022\n\nauto_login\030\010 \001(\005\"t\n\007P"
+    "ostMsg\022\022\n\nto_user_id\030\001 \001(\005\022\024\n\014from_user_"
+    "id\030\002 \001(\005\022\020\n\010msg_type\030\003 \001(\005\022\020\n\010text_msg\030\004"
+    " \001(\t\022\033\n\010post_cmd\030\005 \001(\0162\t.Chat.CMD\"\301\001\n\tNe"
+    "tMsgReq\022\026\n\003cmd\030\001 \002(\0162\t.Chat.CMD\022\017\n\007user_"
+    "ip\030\002 \002(\t\022#\n\nlogin_info\030\004 \001(\0132\017.Chat.Logi"
+    "nInfo\022\017\n\007user_id\030\005 \001(\005\022%\n\013user_config\030\006 "
+    "\001(\0132\020.Chat.UserConfig\022\037\n\010post_msg\030\007 \001(\0132"
+    "\r.Chat.PostMsg\022\r\n\005value\030\010 \001(\005\"\203\001\n\tNetMsg"
+    "Rsp\022\026\n\003cmd\030\001 \002(\0162\t.Chat.CMD\022\016\n\006result\030\002 "
+    "\002(\005\022\'\n\014login_result\030\003 \001(\0132\021.Chat.LoginRe"
+    "sult\022%\n\013user_config\030\004 \001(\0132\020.Chat.UserCon"
+    "fig\"\231\001\n\010TransMsg\022\026\n\003cmd\030\001 \002(\0162\t.Chat.CMD"
+    "\022\034\n\006region\030\002 \003(\0132\014.Chat.Region\022\030\n\004user\030\003"
+    " \003(\0132\n.Chat.User\022\037\n\010post_msg\030\004 \001(\0132\r.Cha"
+    "t.PostMsg\022\016\n\006result\030\005 \002(\005\022\014\n\004desc\030\006 \001(\t\""
+    ":\n\017PRIVATE_MSG_RSP\022\026\n\003cmd\030\001 \002(\0162\t.Chat.C"
+    "MD\022\017\n\007confirm\030\002 \001(\005*\370\003\n\003CMD\022\022\n\rLOGIN_REQ"
+    "UEST\020\221N\022\023\n\016LOGIN_RESPONSE\020\222N\022\023\n\016LOGOUT_R"
+    "EQUEST\020\223N\022\026\n\021CLIENT_HEART_BEAT\020\224N\022\027\n\021CLI"
+    "ENT_GET_CONFIG\020\241\234\001\022\033\n\025CLIENT_GET_CONFIG_"
+    "RSP\020\242\234\001\022\027\n\021CLIENT_SET_CONFIG\020\243\234\001\022\033\n\025CLIE"
+    "NT_SET_CONFIG_RSP\020\244\234\001\022\027\n\021CLIENT_GET_REGI"
+    "ON\020\261\352\001\022\033\n\025CLIENT_GET_REGION_RSP\020\262\352\001\022\025\n\017C"
+    "LIENT_GET_USER\020\263\352\001\022\031\n\023CLIENT_GET_USER_RS"
+    "P\020\264\352\001\022\025\n\017CLIENT_POST_MSG\020\301\270\002\022\031\n\023CLIENT_P"
+    "OST_MSG_RSP\020\302\270\002\022\024\n\016CLIENT_RES_RSP\020\303\270\002\022\030\n"
+    "\022CLIENT_CHAT_INVITE\020\321\206\003\022\030\n\022CLIENT_CHAT_C"
+    "ANCEL\020\322\206\003\022\030\n\022CLIENT_CHAT_ACCEPT\020\323\206\003\022\030\n\022C"
+    "LIENT_CHAT_REFUSE\020\324\206\003\022\027\n\021CLIENT_CHAT_ERR"
+    "OR\020\325\206\003", 1846);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message.proto", &protobuf_RegisterTypes);
   Region::default_instance_ = new Region();
@@ -436,7 +435,6 @@ const ::std::string Region::_default_name_;
 #ifndef _MSC_VER
 const int Region::kIdFieldNumber;
 const int Region::kNameFieldNumber;
-const int Region::kRegionFieldNumber;
 const int Region::kParentIdFieldNumber;
 const int Region::kUiHandleFieldNumber;
 #endif  // !_MSC_VER
@@ -507,7 +505,6 @@ void Region::Clear() {
     parent_id_ = 0;
     ui_handle_ = 0;
   }
-  region_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -546,21 +543,6 @@ bool Region::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_region;
-        break;
-      }
-      
-      // repeated .Chat.Region region = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_region:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_region()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(26)) goto parse_region;
         if (input->ExpectTag(32)) goto parse_parent_id;
         break;
       }
@@ -573,7 +555,7 @@ bool Region::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &parent_id_)));
-          _set_bit(3);
+          _set_bit(2);
         } else {
           goto handle_uninterpreted;
         }
@@ -589,7 +571,7 @@ bool Region::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &ui_handle_)));
-          _set_bit(4);
+          _set_bit(3);
         } else {
           goto handle_uninterpreted;
         }
@@ -629,19 +611,13 @@ void Region::SerializeWithCachedSizes(
       2, this->name(), output);
   }
   
-  // repeated .Chat.Region region = 3;
-  for (int i = 0; i < this->region_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->region(i), output);
-  }
-  
   // optional int32 parent_id = 4;
-  if (_has_bit(3)) {
+  if (_has_bit(2)) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->parent_id(), output);
   }
   
   // optional int32 ui_handle = 5;
-  if (_has_bit(4)) {
+  if (_has_bit(3)) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->ui_handle(), output);
   }
   
@@ -668,20 +644,13 @@ void Region::SerializeWithCachedSizes(
         2, this->name(), target);
   }
   
-  // repeated .Chat.Region region = 3;
-  for (int i = 0; i < this->region_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        3, this->region(i), target);
-  }
-  
   // optional int32 parent_id = 4;
-  if (_has_bit(3)) {
+  if (_has_bit(2)) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->parent_id(), target);
   }
   
   // optional int32 ui_handle = 5;
-  if (_has_bit(4)) {
+  if (_has_bit(3)) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->ui_handle(), target);
   }
   
@@ -725,14 +694,6 @@ int Region::ByteSize() const {
     }
     
   }
-  // repeated .Chat.Region region = 3;
-  total_size += 1 * this->region_size();
-  for (int i = 0; i < this->region_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->region(i));
-  }
-  
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -758,7 +719,6 @@ void Region::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Region::MergeFrom(const Region& from) {
   GOOGLE_CHECK_NE(&from, this);
-  region_.MergeFrom(from.region_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
       set_id(from.id());
@@ -766,10 +726,10 @@ void Region::MergeFrom(const Region& from) {
     if (from._has_bit(1)) {
       set_name(from.name());
     }
-    if (from._has_bit(3)) {
+    if (from._has_bit(2)) {
       set_parent_id(from.parent_id());
     }
-    if (from._has_bit(4)) {
+    if (from._has_bit(3)) {
       set_ui_handle(from.ui_handle());
     }
   }
@@ -797,7 +757,6 @@ void Region::Swap(Region* other) {
   if (other != this) {
     std::swap(id_, other->id_);
     std::swap(name_, other->name_);
-    region_.Swap(&other->region_);
     std::swap(parent_id_, other->parent_id_);
     std::swap(ui_handle_, other->ui_handle_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -820,13 +779,13 @@ void Region::Swap(Region* other) {
 const ::std::string User::_default_user_name_;
 const ::std::string User::_default_user_pwd_;
 const ::std::string User::_default_user_ip_;
-const ::std::string User::_default_client_name_;
+const ::std::string User::_default_display_name_;
 const ::std::string User::_default_user_phone_;
 #ifndef _MSC_VER
 const int User::kUserNameFieldNumber;
 const int User::kUserPwdFieldNumber;
 const int User::kUserIpFieldNumber;
-const int User::kClientNameFieldNumber;
+const int User::kDisplayNameFieldNumber;
 const int User::kUserPhoneFieldNumber;
 const int User::kLonginTimeFieldNumber;
 const int User::kLogoutTimeFieldNumber;
@@ -859,7 +818,7 @@ void User::SharedCtor() {
   user_name_ = const_cast< ::std::string*>(&_default_user_name_);
   user_pwd_ = const_cast< ::std::string*>(&_default_user_pwd_);
   user_ip_ = const_cast< ::std::string*>(&_default_user_ip_);
-  client_name_ = const_cast< ::std::string*>(&_default_client_name_);
+  display_name_ = const_cast< ::std::string*>(&_default_display_name_);
   user_phone_ = const_cast< ::std::string*>(&_default_user_phone_);
   longin_time_ = GOOGLE_LONGLONG(0);
   logout_time_ = GOOGLE_LONGLONG(0);
@@ -887,8 +846,8 @@ void User::SharedDtor() {
   if (user_ip_ != &_default_user_ip_) {
     delete user_ip_;
   }
-  if (client_name_ != &_default_client_name_) {
-    delete client_name_;
+  if (display_name_ != &_default_display_name_) {
+    delete display_name_;
   }
   if (user_phone_ != &_default_user_phone_) {
     delete user_phone_;
@@ -936,8 +895,8 @@ void User::Clear() {
       }
     }
     if (_has_bit(3)) {
-      if (client_name_ != &_default_client_name_) {
-        client_name_->clear();
+      if (display_name_ != &_default_display_name_) {
+        display_name_->clear();
       }
     }
     if (_has_bit(4)) {
@@ -1015,19 +974,19 @@ bool User::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_client_name;
+        if (input->ExpectTag(34)) goto parse_display_name;
         break;
       }
       
-      // optional string client_name = 4;
+      // optional string display_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_client_name:
+         parse_display_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_client_name()));
+                input, this->mutable_display_name()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->client_name().data(), this->client_name().length(),
+            this->display_name().data(), this->display_name().length(),
             ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
@@ -1240,13 +1199,13 @@ void User::SerializeWithCachedSizes(
       3, this->user_ip(), output);
   }
   
-  // optional string client_name = 4;
+  // optional string display_name = 4;
   if (_has_bit(3)) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->client_name().data(), this->client_name().length(),
+      this->display_name().data(), this->display_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      4, this->client_name(), output);
+      4, this->display_name(), output);
   }
   
   // optional string user_phone = 5;
@@ -1342,14 +1301,14 @@ void User::SerializeWithCachedSizes(
         3, this->user_ip(), target);
   }
   
-  // optional string client_name = 4;
+  // optional string display_name = 4;
   if (_has_bit(3)) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->client_name().data(), this->client_name().length(),
+      this->display_name().data(), this->display_name().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->client_name(), target);
+        4, this->display_name(), target);
   }
   
   // optional string user_phone = 5;
@@ -1441,11 +1400,11 @@ int User::ByteSize() const {
           this->user_ip());
     }
     
-    // optional string client_name = 4;
-    if (has_client_name()) {
+    // optional string display_name = 4;
+    if (has_display_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->client_name());
+          this->display_name());
     }
     
     // optional string user_phone = 5;
@@ -1557,7 +1516,7 @@ void User::MergeFrom(const User& from) {
       set_user_ip(from.user_ip());
     }
     if (from._has_bit(3)) {
-      set_client_name(from.client_name());
+      set_display_name(from.display_name());
     }
     if (from._has_bit(4)) {
       set_user_phone(from.user_phone());
@@ -1617,7 +1576,7 @@ void User::Swap(User* other) {
     std::swap(user_name_, other->user_name_);
     std::swap(user_pwd_, other->user_pwd_);
     std::swap(user_ip_, other->user_ip_);
-    std::swap(client_name_, other->client_name_);
+    std::swap(display_name_, other->display_name_);
     std::swap(user_phone_, other->user_phone_);
     std::swap(longin_time_, other->longin_time_);
     std::swap(logout_time_, other->logout_time_);

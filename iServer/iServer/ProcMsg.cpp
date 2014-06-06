@@ -53,13 +53,13 @@ void CProcMsg::operator()()
     case CLIENT_GET_REGION:
         {
             m_bNeedRsp = false;
-            bRet = GetUserMgr().GetRegion(m_reqMsg.user_ip().c_str());
+            bRet = GetUserMgr().GetRegion_Proto(m_reqMsg.user_ip().c_str());
             break;
         }
     case CLIENT_GET_USER:
         {
             m_bNeedRsp = false;
-            bRet = GetUserMgr().GetUserByRegion(m_reqMsg.user_ip().c_str(), m_reqMsg.value());
+            bRet = GetUserMgr().GetUserByRegion_Proto(m_reqMsg.user_ip().c_str(), m_reqMsg.value());
             break;
         }
     case CLIENT_POST_MSG:
@@ -90,7 +90,7 @@ void CProcMsg::operator()()
 bool CProcMsg::ProcTransMsg(const char* from_ip, const PostMsg& postMsg)
 {
     User userInfo;
-    if (false == GetUserMgr().GetUser(postMsg.to_user_id(), userInfo))
+    if (false == GetUserMgr().GetUser_Proto(postMsg.to_user_id(), userInfo))
     {
         return false;
     }

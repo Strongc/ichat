@@ -153,18 +153,6 @@ class Region : public ::google::protobuf::Message {
   inline void set_name(const char* value, size_t size);
   inline ::std::string* mutable_name();
   
-  // repeated .Chat.Region region = 3;
-  inline int region_size() const;
-  inline void clear_region();
-  static const int kRegionFieldNumber = 3;
-  inline const ::Chat::Region& region(int index) const;
-  inline ::Chat::Region* mutable_region(int index);
-  inline ::Chat::Region* add_region();
-  inline const ::google::protobuf::RepeatedPtrField< ::Chat::Region >&
-      region() const;
-  inline ::google::protobuf::RepeatedPtrField< ::Chat::Region >*
-      mutable_region();
-  
   // optional int32 parent_id = 4;
   inline bool has_parent_id() const;
   inline void clear_parent_id();
@@ -187,14 +175,13 @@ class Region : public ::google::protobuf::Message {
   ::google::protobuf::int32 id_;
   ::std::string* name_;
   static const ::std::string _default_name_;
-  ::google::protobuf::RepeatedPtrField< ::Chat::Region > region_;
   ::google::protobuf::int32 parent_id_;
   ::google::protobuf::int32 ui_handle_;
   friend void  protobuf_AddDesc_message_2eproto();
   friend void protobuf_AssignDesc_message_2eproto();
   friend void protobuf_ShutdownFile_message_2eproto();
   
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
   
   // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
   inline bool _has_bit(int index) const {
@@ -296,15 +283,15 @@ class User : public ::google::protobuf::Message {
   inline void set_user_ip(const char* value, size_t size);
   inline ::std::string* mutable_user_ip();
   
-  // optional string client_name = 4;
-  inline bool has_client_name() const;
-  inline void clear_client_name();
-  static const int kClientNameFieldNumber = 4;
-  inline const ::std::string& client_name() const;
-  inline void set_client_name(const ::std::string& value);
-  inline void set_client_name(const char* value);
-  inline void set_client_name(const char* value, size_t size);
-  inline ::std::string* mutable_client_name();
+  // optional string display_name = 4;
+  inline bool has_display_name() const;
+  inline void clear_display_name();
+  static const int kDisplayNameFieldNumber = 4;
+  inline const ::std::string& display_name() const;
+  inline void set_display_name(const ::std::string& value);
+  inline void set_display_name(const char* value);
+  inline void set_display_name(const char* value, size_t size);
+  inline ::std::string* mutable_display_name();
   
   // optional string user_phone = 5;
   inline bool has_user_phone() const;
@@ -390,8 +377,8 @@ class User : public ::google::protobuf::Message {
   static const ::std::string _default_user_pwd_;
   ::std::string* user_ip_;
   static const ::std::string _default_user_ip_;
-  ::std::string* client_name_;
-  static const ::std::string _default_client_name_;
+  ::std::string* display_name_;
+  static const ::std::string _default_display_name_;
   ::std::string* user_phone_;
   static const ::std::string _default_user_phone_;
   ::google::protobuf::int64 longin_time_;
@@ -1474,60 +1461,35 @@ inline ::std::string* Region::mutable_name() {
   return name_;
 }
 
-// repeated .Chat.Region region = 3;
-inline int Region::region_size() const {
-  return region_.size();
-}
-inline void Region::clear_region() {
-  region_.Clear();
-}
-inline const ::Chat::Region& Region::region(int index) const {
-  return region_.Get(index);
-}
-inline ::Chat::Region* Region::mutable_region(int index) {
-  return region_.Mutable(index);
-}
-inline ::Chat::Region* Region::add_region() {
-  return region_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Chat::Region >&
-Region::region() const {
-  return region_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::Chat::Region >*
-Region::mutable_region() {
-  return &region_;
-}
-
 // optional int32 parent_id = 4;
 inline bool Region::has_parent_id() const {
-  return _has_bit(3);
+  return _has_bit(2);
 }
 inline void Region::clear_parent_id() {
   parent_id_ = 0;
-  _clear_bit(3);
+  _clear_bit(2);
 }
 inline ::google::protobuf::int32 Region::parent_id() const {
   return parent_id_;
 }
 inline void Region::set_parent_id(::google::protobuf::int32 value) {
-  _set_bit(3);
+  _set_bit(2);
   parent_id_ = value;
 }
 
 // optional int32 ui_handle = 5;
 inline bool Region::has_ui_handle() const {
-  return _has_bit(4);
+  return _has_bit(3);
 }
 inline void Region::clear_ui_handle() {
   ui_handle_ = 0;
-  _clear_bit(4);
+  _clear_bit(3);
 }
 inline ::google::protobuf::int32 Region::ui_handle() const {
   return ui_handle_;
 }
 inline void Region::set_ui_handle(::google::protobuf::int32 value) {
-  _set_bit(4);
+  _set_bit(3);
   ui_handle_ = value;
 }
 
@@ -1661,46 +1623,46 @@ inline ::std::string* User::mutable_user_ip() {
   return user_ip_;
 }
 
-// optional string client_name = 4;
-inline bool User::has_client_name() const {
+// optional string display_name = 4;
+inline bool User::has_display_name() const {
   return _has_bit(3);
 }
-inline void User::clear_client_name() {
-  if (client_name_ != &_default_client_name_) {
-    client_name_->clear();
+inline void User::clear_display_name() {
+  if (display_name_ != &_default_display_name_) {
+    display_name_->clear();
   }
   _clear_bit(3);
 }
-inline const ::std::string& User::client_name() const {
-  return *client_name_;
+inline const ::std::string& User::display_name() const {
+  return *display_name_;
 }
-inline void User::set_client_name(const ::std::string& value) {
+inline void User::set_display_name(const ::std::string& value) {
   _set_bit(3);
-  if (client_name_ == &_default_client_name_) {
-    client_name_ = new ::std::string;
+  if (display_name_ == &_default_display_name_) {
+    display_name_ = new ::std::string;
   }
-  client_name_->assign(value);
+  display_name_->assign(value);
 }
-inline void User::set_client_name(const char* value) {
+inline void User::set_display_name(const char* value) {
   _set_bit(3);
-  if (client_name_ == &_default_client_name_) {
-    client_name_ = new ::std::string;
+  if (display_name_ == &_default_display_name_) {
+    display_name_ = new ::std::string;
   }
-  client_name_->assign(value);
+  display_name_->assign(value);
 }
-inline void User::set_client_name(const char* value, size_t size) {
+inline void User::set_display_name(const char* value, size_t size) {
   _set_bit(3);
-  if (client_name_ == &_default_client_name_) {
-    client_name_ = new ::std::string;
+  if (display_name_ == &_default_display_name_) {
+    display_name_ = new ::std::string;
   }
-  client_name_->assign(reinterpret_cast<const char*>(value), size);
+  display_name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* User::mutable_client_name() {
+inline ::std::string* User::mutable_display_name() {
   _set_bit(3);
-  if (client_name_ == &_default_client_name_) {
-    client_name_ = new ::std::string;
+  if (display_name_ == &_default_display_name_) {
+    display_name_ = new ::std::string;
   }
-  return client_name_;
+  return display_name_;
 }
 
 // optional string user_phone = 5;

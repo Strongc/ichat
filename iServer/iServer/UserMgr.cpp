@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "UserMgr.h"
 #include "NetProc.h"
+#include "xml_def.h"
 
 CUserMgr& GetUserMgr()
 {
@@ -152,7 +153,7 @@ bool CUserMgr::SetUserConfig(const int nUserId, const UserConfig& userConfig)
 }
 
 // 获取区域结构
-bool CUserMgr::GetRegion(const char* client_ip)
+bool CUserMgr::GetRegion_Proto(const char* client_ip)
 {
     TransMsg transMsg;
     transMsg.set_cmd(CLIENT_GET_REGION_RSP);
@@ -173,7 +174,7 @@ bool CUserMgr::GetRegion(const char* client_ip)
 }
 
 // 根据区域ID获取下属的用户
-bool CUserMgr::GetUserByRegion(const char* client_ip, const int nRegionId)
+bool CUserMgr::GetUserByRegion_Proto(const char* client_ip, const int nRegionId)
 {
     int nUserCount = 0;
     string strbuf;
@@ -187,6 +188,7 @@ bool CUserMgr::GetUserByRegion(const char* client_ip, const int nRegionId)
     {
         if (itr->parent_id() != nRegionId)
         {
+            ++itr;
             continue;
         }
 
@@ -201,13 +203,162 @@ bool CUserMgr::GetUserByRegion(const char* client_ip, const int nRegionId)
             printfd("region msg...(%d):\n%s\n", nRet, transMsg.DebugString().c_str());
             transMsg.clear_user();
         }
+        ++itr;
     }
 
     return true;
 }
 
 // 根据用户ID获取用户信息
-bool CUserMgr::GetUser(const int nUserId, User& userInfo)
+bool CUserMgr::GetUser_Proto(const int nUserId, User& userInfo)
 {
     return false;
+}
+
+bool CUserMgr::GetRegion_Xml(std::string& region_list_xml)
+{
+    CMarkup xml;
+    xml.SetDoc(XML_HEADER);
+    xml.AddElem(XML_REGION_LIST);
+    xml.IntoElem();
+
+    CBoostGuard regLock(&m_regionLock);
+    for (std::list<Region>::const_iterator itr = m_lsAllRegion.begin();
+        itr != m_lsAllRegion.end(); ++itr)
+    {
+        xml.AddElem(XML_REGION);
+        xml.IntoElem();
+        xml.AddElem(XML_REGION_ID, itr->id());
+        xml.AddElem(XML_REGION_NAME, fcU2A(itr->name().c_str()));
+        xml.AddElem(XML_PARENT_ID, itr->parent_id());
+        xml.OutOfElem();
+    }
+
+    xml.OutOfElem();
+    
+    region_list_xml = xml.GetDoc();
+
+    return true;
+}
+
+bool CUserMgr::GetRegionInfo_Xml(const std::string& _region_id, std::string& region_info)
+{
+    int region_id = _tstoi(_region_id.c_str());
+
+    CMarkup xml;
+    xml.SetDoc(XML_HEADER);
+    xml.AddElem(XML_REGION);
+    xml.IntoElem();
+
+    bool find_ret = false;
+    CBoostGuard regLock(&m_regionLock);
+    for (std::list<Region>::const_iterator itr = m_lsAllRegion.begin();
+        itr != m_lsAllRegion.end(); ++itr)
+    {
+        if (itr->id() == region_id)
+        {
+            find_ret = true;
+            xml.AddElem(XML_REGION_ID, itr->id());
+            xml.AddElem(XML_REGION_NAME, fcU2A(itr->name().c_str()));
+            xml.AddElem(XML_PARENT_ID, itr->parent_id());
+        }
+    }
+
+    xml.OutOfElem();
+
+    region_info = xml.GetDoc();
+    return find_ret;
+}
+
+bool CUserMgr::GetUser_Xml(const std::string& _region_id, std::string& user_list_xml)
+{
+    int region_id = _tstoi(_region_id.c_str());
+
+    CMarkup xml;
+    xml.SetDoc(XML_HEADER);
+    xml.AddElem(XML_USER_LIST);
+    xml.IntoElem();
+
+    CBoostGuard usrLock(&m_userLock);
+    std::list<User>::const_iterator itr = m_lsAllUser.begin();
+    while (itr != m_lsAllUser.end())
+    {
+        if (itr->parent_id() != region_id)
+        {
+            ++itr;
+            continue;
+        }
+
+        xml.AddElem(XML_USER);
+        xml.IntoElem();
+        xml.AddElem(XML_USER_ID, itr->user_id());
+        xml.AddElem(XML_PARENT_ID, fcU2A(itr->user_name().c_str()));
+        xml.AddElem(XML_USER_NAME, itr->parent_id());
+        xml.AddElem(XML_USER_IP, itr->user_ip());
+        xml.AddElem(XML_DISPLAY_NAME, fcU2A(itr->display_name().c_str()));
+
+        const UserConfig& uc = itr->user_config();
+        xml.AddElem(XML_CONFIG);
+        xml.IntoElem();
+        xml.AddElem(XML_BUBBLE, uc.use_bubble());
+        xml.AddElem(XML_SOUND, uc.use_sound());
+        xml.AddElem(XML_FONT_COLOR, uc.font_color());
+        xml.AddElem(XML_FONT_FAMILY, fcU2A(uc.font_name().c_str()));
+        xml.AddElem(XML_FONT_SIZE, uc.font_size());
+        xml.AddElem(XML_AUTO_LOGIN, uc.auto_login());
+        xml.OutOfElem();
+
+        xml.OutOfElem();
+
+        ++itr;
+    }
+    xml.OutOfElem();
+
+    user_list_xml = xml.GetDoc();
+
+    return true;
+}
+
+bool CUserMgr::GetUserInfo_Xml(const std::string& _user_id, std::string& user_info)
+{
+    int user_id = _tstoi(_user_id.c_str());
+
+    CMarkup xml;
+    xml.SetDoc(XML_HEADER);
+    xml.AddElem(XML_USER);
+    xml.IntoElem();
+
+    bool find_ret = false;
+    CBoostGuard usrLock(&m_userLock);
+    std::list<User>::const_iterator itr = m_lsAllUser.begin();
+    while (itr != m_lsAllUser.end())
+    {
+        if (itr->user_id() == user_id)
+        {
+            find_ret = true;
+
+            xml.AddElem(XML_USER_ID, itr->user_id());
+            xml.AddElem(XML_PARENT_ID, fcU2A(itr->user_name().c_str()));
+            xml.AddElem(XML_USER_NAME, itr->parent_id());
+            xml.AddElem(XML_USER_IP, itr->user_ip());
+            xml.AddElem(XML_DISPLAY_NAME, fcU2A(itr->display_name().c_str()));
+
+            const UserConfig& uc = itr->user_config();
+            xml.AddElem(XML_CONFIG);
+            xml.IntoElem();
+            xml.AddElem(XML_BUBBLE, uc.use_bubble());
+            xml.AddElem(XML_SOUND, uc.use_sound());
+            xml.AddElem(XML_FONT_COLOR, uc.font_color());
+            xml.AddElem(XML_FONT_FAMILY, fcU2A(uc.font_name().c_str()));
+            xml.AddElem(XML_FONT_SIZE, uc.font_size());
+            xml.AddElem(XML_AUTO_LOGIN, uc.auto_login());
+            xml.OutOfElem();
+        }
+        ++itr;
+    }
+
+    xml.OutOfElem();
+
+    user_info = xml.GetDoc();
+    return find_ret;
 }

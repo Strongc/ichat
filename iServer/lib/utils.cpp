@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "utils.h"
+#include "fcTchar.h"
 
 std::string format_key(const char* ip, const int port)
 {
