@@ -1,6 +1,12 @@
 ﻿#include "url_client.h"
 #include <sstream>
 
+url_client& get_url_client()
+{
+    static url_client uc;
+    return uc;
+}
+
 static size_t OnWriteData(void* buffer, size_t size, size_t nmemb, void* lpVoid)
 {
 	std::string* str = dynamic_cast<std::string*>((std::string *)lpVoid);

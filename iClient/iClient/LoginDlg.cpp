@@ -21,6 +21,8 @@ LoginDlg::LoginDlg(QWidget *parent) :
 
     load_system_config();
 
+    curl_global_init(CURL_GLOBAL_ALL);
+
 // test data start
     ui->le_username->setText("1");
     ui->le_password->setText("1");
@@ -29,6 +31,7 @@ LoginDlg::LoginDlg(QWidget *parent) :
 
 LoginDlg::~LoginDlg()
 {
+    curl_global_cleanup();
     delete ui;
 }
 
@@ -147,5 +150,7 @@ bool LoginDlg::save_system_config()
 
 bool LoginDlg::login()
 {
-    return false;
+    std::string res;
+    int a = get_url_client().get_("10.20.35.20:6262/api/region", res);
+    return true;
 }

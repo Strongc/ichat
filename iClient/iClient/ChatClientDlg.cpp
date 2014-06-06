@@ -3,6 +3,7 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include "ConfigDlg.h"
+#include "lib/url_client.h"
 
 const QString main_control_ico("images/Main.ico");
 const QString branck_ico("images/Branch.ico");
@@ -90,8 +91,19 @@ void ChatClientDlg::init_tray()
 
 void ChatClientDlg::start()
 {
+    std::string region_list;
+    int ret = get_all_region(region_list);
+    if (ret)
+    {
 
+    }
 
+    QList<ORG_INFO> org_list;
+    ret = parse_region_list(region_list, org_list);
+    if (ret)
+    {
+
+    }
     ORG_INFO oi;
     insert_org(oi);
 
@@ -229,4 +241,9 @@ void ChatClientDlg::config()
             QMessageBox::warning(this, "提示", "保存服务器信息失败");
         }
     }
+}
+
+int ChatClientDlg::get_all_region(std::string &region_list)
+{
+    return get_url_client().get_("http://10.20.35.20:6262/api/region", region_list);
 }

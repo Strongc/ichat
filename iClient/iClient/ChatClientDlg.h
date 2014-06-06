@@ -57,6 +57,9 @@ private:
 
     void init_tray();
     //void flush_tray_icon();
+
+    int get_all_region(std::string& region_list);
+    int parse_region_list(std::string& region_list, QList<ORG_INFO>& org_list);
 };
 
 #endif // CHATCLIENTDLG_H

@@ -6,6 +6,7 @@
 #include "ChatClientDlg.h"
 #include "ConfigDlg.h"
 #include "AppDef.h"
+#include "lib/url_client.h"
 
 namespace Ui {
 class QLoginDlg;

@@ -5,6 +5,9 @@
 #include "curl\include\curl.h"
 #include "curl\include\easy.h"
 
+class url_client;
+url_client& get_url_client();
+
 class url_client
 {
 public:
