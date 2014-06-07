@@ -2,6 +2,12 @@
 #include "ApiProc.h"
 #include "UserMgr.h"
 
+namespace _opera_type {
+
+    const std::string opera_login = "1";
+    const std::string opera_logout = "2";
+    const std::string opera_heartb = "3";
+}
 
 namespace _stock_replies {
 
@@ -183,6 +189,61 @@ int CApiProc::ApiProc(const _request& req_, _reply& rep_)
 void user_state(const _request& req, _reply& rep)
 {
     printf("user_state:%s\n%s\n", req.uri.c_str(), req.extern_string.c_str());
+    // /api/state/1
+    if (req.method != "PUT")
+    {
+        rep = _stock_replies::stock_reply(http_status::bad_request);
+        return ;
+    }
+
+    std::string accept_type = "application/xml";
+    for (size_t t = 0; t < req.headers.size(); ++t)
+    {
+        std::string name = req.headers[t].name;
+        std::transform(name.begin(), name.end(), name.begin(), tolower);
+        if (name == "accept")
+        {
+            accept_type = req.headers[t].value;
+        }
+    }
+
+    std::string uri = req.uri;
+    unsigned pos = uri.find_last_of('/', std::string::npos);
+    if (std::string::npos == pos)
+    {
+        rep = _stock_replies::stock_reply(http_status::bad_request);
+        return ;
+    }
+    std::string opera = uri.substr(pos+1);
+
+    std::string content;
+    if (_opera_type::opera_login == opera)
+    {
+        if (false == GetUserMgr().UserLogin_Xml(req.extern_string, content))
+        {
+            rep = _stock_replies::stock_reply(http_status::bad_request);
+            return ;
+        }
+    }
+    else if (_opera_type::opera_logout == opera)
+    {
+    }
+    else if (_opera_type::opera_heartb == opera)
+    {
+    }
+    else
+    {
+        rep = _stock_replies::stock_reply(http_status::bad_request);
+        return ;
+    }
+
+    rep.status = http_status::ok;
+    rep.content = fcA2U(content.c_str());
+    rep.headers.resize(2);
+    rep.headers[0].name = "Content-Length";
+    rep.headers[0].value = boost::lexical_cast<std::string>(rep.content.size());
+    rep.headers[1].name = "Content-Type";
+    rep.headers[1].value = accept_type;
 }
 
 void region_oper(const _request& req, _reply& rep)

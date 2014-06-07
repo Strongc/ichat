@@ -67,6 +67,7 @@ public:
     bool GetUser_Proto(const int nUserId, User& userInfo);
 
     /* xml */
+    bool UserLogin_Xml(const std::string& login, std::string& result);
     bool GetRegion_Xml(std::string& region_list_xml);
     bool GetRegionInfo_Xml(const std::string& _region_id, std::string& region_info);
 

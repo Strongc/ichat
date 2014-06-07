@@ -24,5 +24,10 @@ std::string XML_FONT_FAMILY = "font_family";
 std::string XML_FONT_SIZE = "font_size";
 std::string XML_AUTO_LOGIN = "auto_login";
 
+std::string XML_ROOT = "root";
+std::string XML_USER_PASSWORD = "user_password";
+std::string XML_RESULT = "result";
+std::string XML_RESULT_MSG = "result_msg";
+
 
 

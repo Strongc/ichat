@@ -215,6 +215,79 @@ bool CUserMgr::GetUser_Proto(const int nUserId, User& userInfo)
     return false;
 }
 
+
+bool CUserMgr::UserLogin_Xml(const std::string& login, std::string& result)
+{
+    CMarkup xml;
+    if (false == xml.SetDoc(login))
+    {
+        return false;
+    }
+    if (false == xml.FindElem(XML_ROOT))
+    {
+        return false;
+    }
+    xml.IntoElem();
+    if (false == xml.FindElem(XML_USER_NAME))
+    {
+        return false;
+    }
+    std::string user_name = xml.GetData();
+    if (false == xml.FindElem(XML_USER_PASSWORD))
+    {
+        return false;
+    }
+    std::string user_password = xml.GetData();
+    if (false == xml.FindElem(XML_USER_IP))
+    {
+        return false;
+    }
+    std::string user_ip = xml.GetData();
+
+    CMarkup xml_ret;
+    xml_ret.SetDoc(XML_HEADER);
+    xml_ret.AddElem(XML_ROOT);
+    xml_ret.IntoElem();
+
+    bool find_ret = false;
+    CBoostGuard usrLock(&m_userLock);
+    for (std::list<User>::iterator itr = m_lsAllUser.begin();
+        itr != m_lsAllUser.end(); ++itr)
+    {
+        if (itr->user_name() == user_name)
+        {
+            find_ret = true;
+            if (itr->user_pwd() != user_password)
+            {
+                xml_ret.AddElem(XML_RESULT, -1);
+                xml_ret.AddElem(XML_RESULT_MSG, "wrong password");
+                xml_ret.AddElem(XML_USER_ID, -1);
+            }
+            else
+            {
+                xml_ret.AddElem(XML_RESULT, 1);
+                xml_ret.AddElem(XML_RESULT_MSG, "ok");
+                xml_ret.AddElem(XML_USER_ID, itr->user_id());
+
+                itr->set_longin_time(time(NULL));
+                itr->set_user_ip(user_ip);
+                m_userOper.UpdateUserInfo(*itr);
+            }
+        }
+    }
+    if (false == find_ret)
+    {
+        xml_ret.AddElem(XML_RESULT, -2);
+        xml_ret.AddElem(XML_RESULT_MSG, "no such user");
+        xml_ret.AddElem(XML_USER_ID, -1);
+    }
+    xml_ret.OutOfElem();
+    
+    result = xml_ret.GetDoc();
+
+    return true;
+}
+
 bool CUserMgr::GetRegion_Xml(std::string& region_list_xml)
 {
     CMarkup xml;
