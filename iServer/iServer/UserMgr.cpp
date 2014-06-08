@@ -272,6 +272,8 @@ bool CUserMgr::UserLogin_Xml(const std::string& login, std::string& result)
                 itr->set_longin_time(time(NULL));
                 itr->set_user_ip(user_ip);
                 m_userOper.UpdateUserInfo(*itr);
+
+                printfd("+ user:%s id:%d login\n", user_name.c_str(), itr->user_id());
             }
         }
     }
@@ -282,7 +284,133 @@ bool CUserMgr::UserLogin_Xml(const std::string& login, std::string& result)
         xml_ret.AddElem(XML_USER_ID, -1);
     }
     xml_ret.OutOfElem();
-    
+    result = xml_ret.GetDoc();
+
+    return true;
+}
+
+bool CUserMgr::UserLogout_Xml(const std::string& logout, std::string& result)
+{
+    CMarkup xml;
+    if (false == xml.SetDoc(logout))
+    {
+        return false;
+    }
+    if (false == xml.FindElem(XML_ROOT))
+    {
+        return false;
+    }
+    xml.IntoElem();
+    if (false == xml.FindElem(XML_USER_ID))
+    {
+        return false;
+    }
+    std::string user_id = xml.GetData();
+    xml.OutOfElem();
+
+    int nUserId = atoi(user_id.c_str());
+    if (nUserId <= 0)
+    {
+        return false;
+    }
+
+    // 
+    CMarkup xml_ret;
+    xml_ret.SetDoc(XML_HEADER);
+    xml_ret.AddElem(XML_ROOT);
+    xml_ret.IntoElem();
+
+    bool find_ret = false;
+    CBoostGuard usrLock(&m_userLock);
+    for (std::list<User>::iterator itr = m_lsAllUser.begin();
+        itr != m_lsAllUser.end(); ++itr)
+    {
+        if (itr->user_id() == nUserId)
+        {
+            find_ret = true;
+            xml_ret.AddElem(XML_RESULT, 1);
+            xml_ret.AddElem(XML_RESULT_MSG, "ok");
+            xml_ret.AddElem(XML_USER_ID, itr->user_id());
+
+            itr->set_logout_time(time(NULL));
+            m_userOper.UpdateUserInfo(*itr);
+            
+            printfd("- user:%s id:%d logout\n", itr->user_name().c_str(), itr->user_id());
+        }
+    }
+    if (false == find_ret)
+    {
+        xml_ret.AddElem(XML_RESULT, -2);
+        xml_ret.AddElem(XML_RESULT_MSG, "no such user");
+        xml_ret.AddElem(XML_USER_ID, -1);
+    }
+    xml_ret.OutOfElem();
+    result = xml_ret.GetDoc();
+
+    return true;
+}
+
+
+bool CUserMgr::UserHeartBeat_Xml(const std::string& logout, std::string& result)
+{
+    CMarkup xml;
+    if (false == xml.SetDoc(logout))
+    {
+        return false;
+    }
+    if (false == xml.FindElem(XML_ROOT))
+    {
+        return false;
+    }
+    xml.IntoElem();
+    if (false == xml.FindElem(XML_USER_ID))
+    {
+        return false;
+    }
+    std::string user_id = xml.GetData();
+    xml.OutOfElem();
+
+    int nUserId = atoi(user_id.c_str());
+    if (nUserId <= 0)
+    {
+        return false;
+    }
+
+    // 
+    CMarkup xml_ret;
+    xml_ret.SetDoc(XML_HEADER);
+    xml_ret.AddElem(XML_ROOT);
+    xml_ret.IntoElem();
+
+    bool find_ret = false;
+    CBoostGuard usrLock(&m_userLock);
+    for (std::list<User>::iterator itr = m_lsAllUser.begin();
+        itr != m_lsAllUser.end(); ++itr)
+    {
+        if (itr->user_id() == nUserId)
+        {
+            find_ret = true;
+            xml_ret.AddElem(XML_RESULT, 1);
+            xml_ret.AddElem(XML_RESULT_MSG, "ok");
+            xml_ret.AddElem(XML_USER_ID, itr->user_id());
+
+            itr->set_last_beat(time(NULL));
+            if (time(NULL) % 5 == 0)    // 5sË¢ÐÂÒ»´Î
+            {
+                m_userOper.UpdateUserInfo(*itr);
+            }
+            break;
+
+            printfd("* user:%s id:%d heartbeat\n", itr->user_name().c_str(), itr->user_id());
+        }
+    }
+    if (false == find_ret)
+    {
+        xml_ret.AddElem(XML_RESULT, -2);
+        xml_ret.AddElem(XML_RESULT_MSG, "no such user");
+        xml_ret.AddElem(XML_USER_ID, -1);
+    }
+    xml_ret.OutOfElem();
     result = xml_ret.GetDoc();
 
     return true;

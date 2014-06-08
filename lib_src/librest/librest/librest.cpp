@@ -20,6 +20,8 @@ LIBREST_API int rest_fun_regist(const std::string& api, REST_FUN rest_fun)
 
 	map_rest_fun.insert(std::make_pair(api, rest_fun));
 
+    printf("add rest fun:%s\n", api.c_str());
+
 	return 0;
 }
 
@@ -36,5 +38,6 @@ LIBREST_API int rest_fun_set(const _request& req, _reply& rep)
 			return 0;
 		}
 	}
+    printf("not find rest fun for %s\n", req.uri.c_str());
 	return -1;
 }

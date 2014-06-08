@@ -227,9 +227,19 @@ void user_state(const _request& req, _reply& rep)
     }
     else if (_opera_type::opera_logout == opera)
     {
+        if (false == GetUserMgr().UserLogout_Xml(req.extern_string, content))
+        {
+            rep = _stock_replies::stock_reply(http_status::bad_request);
+            return ;
+        }
     }
     else if (_opera_type::opera_heartb == opera)
     {
+        if (false == GetUserMgr().UserHeartBeat_Xml(req.extern_string, content))
+        {
+            rep = _stock_replies::stock_reply(http_status::bad_request);
+            return ;
+        }
     }
     else
     {

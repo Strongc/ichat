@@ -68,6 +68,9 @@ public:
 
     /* xml */
     bool UserLogin_Xml(const std::string& login, std::string& result);
+    bool UserLogout_Xml(const std::string& logout, std::string& result);
+    bool UserHeartBeat_Xml(const std::string& heartb, std::string& result);
+
     bool GetRegion_Xml(std::string& region_list_xml);
     bool GetRegionInfo_Xml(const std::string& _region_id, std::string& region_info);
 
